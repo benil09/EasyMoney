@@ -1,0 +1,338 @@
+// ============================================================================
+// EasyMoney Wallet Application Database Schema
+// Database Engine: MySQL / MariaDB
+// ============================================================================
+// Architecture Notes:
+// 1. Monetary Values: Stored as BigInt representing the smallest currency unit
+//    (e.g., paise in INR or cents in USD) to prevent floating-point precision issues.
+// 2. Concurrency Control: Uses optimistic locking via the `version` field on Wallet.
+// 3. Double-Entry Bookkeeping: Every settled transaction produces corresponding
+//    DEBIT and CREDIT ledger entries for an immutable audit trail.
+// 4. Sharding & Sagas: Prepared for horizontal sharding across database instances,
+//    with Saga and Outbox patterns for cross-shard eventual consistency.
+// ============================================================================
+
+generator client {
+    provider = "prisma-client"
+    output   = "../src/generated/prisma" // Generates client artifacts into ./generated/prisma
+}
+
+datasource db {
+    provider = "mysql"
+    // Note for Prisma 7+: Connection URLs for migrations are defined in prisma.config.ts,
+    // while runtime connections are managed via Driver Adapters (e.g., @prisma/adapter-mariadb).
+}
+
+// ----------------------------------------------------------------------------
+// Enums
+// ----------------------------------------------------------------------------
+
+/// Represents the lifecycle state of a monetary transaction.
+enum TransactionStatus {
+    PENDING     // Transaction created; awaiting processing / validation
+    PROCESSING  // Transaction is being executed across shards/saga steps
+    SUCCESS     // Funds successfully transferred and ledger entries committed
+    FAILED      // Transaction rejected (e.g., insufficient balance or validation error)
+    REVERSED    // Compensated or rolled back as part of saga failure handling
+}
+
+/// Represents the direction of money flow in double-entry bookkeeping.
+enum LedgerType {
+    CREDIT      // Funds deposited or added into a wallet
+    DEBIT       // Funds withdrawn or deducted from a wallet
+}
+
+/// Operational status of a user's wallet account.
+enum WalletStatus {
+    ACTIVE      // Normal operations allowed
+    LOCKED      // Temporarily locked (e.g., during active concurrent operation)
+    FROZEN      // Administrative freeze (e.g., compliance or fraud detection)
+    CLOSED      // Wallet account permanently closed
+}
+
+/// Execution status of a distributed multi-shard transaction saga.
+enum SagaStatus {
+    STARTED       // Saga initiated
+    EXECUTING     // Executing forward steps
+    COMPLETED     // All forward steps succeeded
+    FAILED        // Step failed; needs or triggered compensation
+    COMPENSATING  // Executing rollback / compensation steps
+    COMPENSATED   // Successfully rolled back to consistent state
+}
+
+// ----------------------------------------------------------------------------
+// Models
+// ----------------------------------------------------------------------------
+
+/// Users represents the primary account holder.
+/// Each user is associated with a wallet and can participate in transactions.
+model Users {
+    /// Unique user identifier. Uses BigInt to match shard-routing formulas and Wallet.user_id.
+    id        BigInt   @id @default(autoincrement()) @db.BigInt
+
+    /// Full legal name or display name of the user.
+    name      String   @db.VarChar(100)
+
+    /// Unique email address used for notifications and authentication.
+    email     String   @unique @db.VarChar(191)
+
+    /// Optional mobile contact number for SMS OTPs and phone-based transfers.
+    phone     String?  @unique @db.VarChar(20)
+
+    /// Timestamp when user account was created.
+    createdAt DateTime @default(now())
+
+    /// Timestamp when user details were last modified.
+    updatedAt DateTime @updatedAt
+
+    // ------------------------------------------------------------------------
+    // Relations
+    // ------------------------------------------------------------------------
+
+    /// 1-to-1 relation: Each user has an associated digital wallet.
+    wallet    Wallet?
+
+    @@map("user")
+}
+
+/// Wallet holds the monetary balance for a user.
+/// Maintains optimistic locking versioning and enforces non-negative balances.
+model Wallet {
+    /// Unique wallet primary key identifier.
+    id        BigInt       @id @default(autoincrement()) @db.BigInt
+
+    /// Foreign key referencing Users.id. Marked @unique for 1-to-1 mapping per user.
+    user_id   BigInt       @unique @db.BigInt
+
+    /// Current balance stored in lowest sub-units (e.g., paise: 100 INR = 10000).
+    balance   BigInt       @default(0) @db.BigInt
+
+    /// ISO-4217 standard currency code (e.g., "INR", "USD", "EUR").
+    currency  String       @default("INR") @db.VarChar(3)
+
+    /// Account operational status (ACTIVE, FROZEN, LOCKED, CLOSED).
+    status    WalletStatus @default(ACTIVE)
+
+    /// Optimistic locking version number. Incremented on every balance mutation
+    /// to detect and prevent concurrent write race conditions.
+    version   Int          @default(0)
+
+    /// Timestamp when wallet was initially created.
+    createdAt DateTime     @default(now())
+
+    /// Automatically updated on any balance or status modification.
+    updatedAt DateTime     @updatedAt
+
+    // ------------------------------------------------------------------------
+    // Relations
+    // ------------------------------------------------------------------------
+
+    /// The user who owns this wallet. Cascade delete if user profile is purged.
+    user                 Users         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    /// Transactions initiated where this wallet was the sender (funds deducted).
+    sentTransactions     Transaction[] @relation("SenderWallet")
+
+    /// Transactions received where this wallet was the recipient (funds credited).
+    receivedTransactions Transaction[] @relation("ReceiverWallet")
+
+    /// Immutable ledger entries recording all credits and debits to this wallet.
+    ledgerEntries        Ledger[]      @relation("WalletLedger")
+
+    // ------------------------------------------------------------------------
+    // Indices
+    // ------------------------------------------------------------------------
+
+    @@index([user_id], name: "idx_user_id")
+    @@index([balance], name: "idx_balance")
+    @@map("wallet")
+}
+
+/// Transaction records an intentional money movement between two wallets.
+/// Acts as the header / parent for corresponding double-entry Ledger records.
+model Transaction {
+    /// Unique UUID transaction identifier.
+    transaction_id     String            @id @default(uuid()) @db.VarChar(36)
+
+    /// Foreign key pointing to the sender's wallet.
+    sender_wallet_id   BigInt            @db.BigInt
+
+    /// Foreign key pointing to the receiver's wallet.
+    receiver_wallet_id BigInt            @db.BigInt
+
+    /// Transfer amount in sub-units (e.g., paise). Must be positive.
+    amount             BigInt            @db.BigInt
+
+    /// ISO-4217 currency code for the transfer.
+    currency           String            @default("INR") @db.VarChar(3)
+
+    /// Current settlement status of the transaction.
+    status             TransactionStatus @default(PENDING)
+
+    /// Unique idempotency token provided by API callers to prevent duplicate charges.
+    idempotency_key    String            @unique @db.VarChar(255)
+
+    /// Diagnostic error message or decline reason if the transaction fails.
+    failure_reason     String?           @db.VarChar(255)
+
+    /// Timestamp when transaction was submitted.
+    createdAt          DateTime          @default(now())
+
+    /// Timestamp when status was last transitioned.
+    updatedAt          DateTime          @updatedAt
+
+    // ------------------------------------------------------------------------
+    // Relations
+    // ------------------------------------------------------------------------
+
+    /// Sender wallet relation. Uses Restrict to preserve financial transaction history.
+    senderWallet   Wallet         @relation("SenderWallet", fields: [sender_wallet_id], references: [id], onDelete: Restrict)
+
+    /// Receiver wallet relation. Uses Restrict to preserve financial transaction history.
+    receiverWallet Wallet         @relation("ReceiverWallet", fields: [receiver_wallet_id], references: [id], onDelete: Restrict)
+
+    /// The double-entry audit records generated for this transaction.
+    ledgerEntries  Ledger[]       @relation("TransactionLedger")
+
+    /// Optional saga orchestrator tracking record for cross-shard operations.
+    sagaInstance   SagaInstance?
+
+    // ------------------------------------------------------------------------
+    // Indices
+    // ------------------------------------------------------------------------
+
+    @@index([amount])
+    @@index([sender_wallet_id, receiver_wallet_id, amount])
+    @@index([status])
+    @@index([createdAt])
+    @@map("txn")
+}
+
+/// Ledger represents the immutable, append-only double-entry bookkeeping journal.
+/// Every successful transaction generates at least two entries:
+/// 1. DEBIT on the sender's wallet
+/// 2. CREDIT on the receiver's wallet
+model Ledger {
+    /// Monotonically increasing unique ledger entry identifier.
+    ledger_id      BigInt     @id @default(autoincrement()) @db.BigInt
+
+    /// Associated transaction identifier.
+    transaction_id String     @db.VarChar(36)
+
+    /// The wallet affected by this ledger entry.
+    wallet_id      BigInt     @db.BigInt
+
+    /// Direction of fund movement (CREDIT = funds added, DEBIT = funds deducted).
+    type           LedgerType
+
+    /// Absolute monetary amount of this ledger line item (in sub-units).
+    amount         BigInt     @db.BigInt
+
+    /// Running balance of the wallet immediately after this entry is applied.
+    /// Vital for reconciliation and tamper-evident audit trails.
+    balance_after  BigInt?    @db.BigInt
+
+    /// Optional line-item description or narrative (e.g., "P2P transfer", "Cashback").
+    description    String?    @db.VarChar(255)
+
+    /// Immutable creation timestamp. Ledgers are write-once and never updated.
+    createdAt      DateTime   @default(now())
+
+    // ------------------------------------------------------------------------
+    // Relations
+    // ------------------------------------------------------------------------
+
+    /// Parent transaction reference. Restricts deletion to guarantee auditability.
+    transaction Transaction @relation("TransactionLedger", fields: [transaction_id], references: [transaction_id], onDelete: Restrict)
+
+    /// The wallet associated with this entry.
+    wallet      Wallet      @relation("WalletLedger", fields: [wallet_id], references: [id], onDelete: Restrict)
+
+    // ------------------------------------------------------------------------
+    // Indices
+    // ------------------------------------------------------------------------
+
+    @@index([transaction_id], name: "idx_ledger_transaction_id")
+    @@index([wallet_id], name: "idx_ledger_wallet_id")
+    @@index([wallet_id, createdAt], name: "idx_ledger_wallet_created")
+    @@map("ledger")
+}
+
+// ----------------------------------------------------------------------------
+// Distributed Transactions / Sagas / Outbox Pattern
+// ----------------------------------------------------------------------------
+
+/// SagaInstance tracks the state machine of distributed multi-shard transactions.
+/// When sender and receiver wallets reside on different shards, this orchestrator
+/// coordinates 2-phase execution and compensating transactions.
+model SagaInstance {
+    /// Unique saga execution identifier.
+    id             String      @id @default(uuid()) @db.VarChar(36)
+
+    /// Transaction being orchestrated. Marked @unique for 1-to-1 saga mapping.
+    transaction_id String      @unique @db.VarChar(36)
+
+    /// Name of the current active step in the workflow (e.g., "RESERVE_FUNDS", "CREDIT_RECEIVER").
+    current_step   String      @db.VarChar(50)
+
+    /// Overall status of the saga execution.
+    status         SagaStatus  @default(STARTED)
+
+    /// JSON payload storing state, parameters, and step outputs for resumption.
+    payload        Json
+
+    /// Diagnostic error details if a step fails and triggers compensation.
+    error_message  String?     @db.Text
+
+    /// When the saga began.
+    createdAt      DateTime    @default(now())
+
+    /// Last time the saga step progressed or changed state.
+    updatedAt      DateTime    @updatedAt
+
+    // ------------------------------------------------------------------------
+    // Relations
+    // ------------------------------------------------------------------------
+
+    transaction    Transaction @relation(fields: [transaction_id], references: [transaction_id], onDelete: Cascade)
+
+    // ------------------------------------------------------------------------
+    // Indices
+    // ------------------------------------------------------------------------
+
+    @@index([status])
+    @@map("saga_instance")
+}
+
+/// OutboxEvent implements the Transactional Outbox pattern.
+/// Guarantees that database state changes and downstream event publishing (e.g., Kafka / RabbitMQ)
+/// happen atomically within the same local transaction on each shard.
+model OutboxEvent {
+    /// Unique event identifier.
+    id           String    @id @default(uuid()) @db.VarChar(36)
+
+    /// Aggregate entity identifier (e.g., wallet_id or transaction_id).
+    aggregate_id String    @db.VarChar(50)
+
+    /// Domain event type (e.g., "WALLET_DEBITED", "TRANSACTION_COMPLETED").
+    event_type   String    @db.VarChar(50)
+
+    /// Serialized event body containing event data.
+    payload      Json
+
+    /// Indicates whether the background event relay worker has published this event.
+    processed    Boolean   @default(false)
+
+    /// Timestamp when event was staged in the database.
+    createdAt    DateTime  @default(now())
+
+    /// Timestamp when event was confirmed published to message broker.
+    processedAt  DateTime?
+
+    // ------------------------------------------------------------------------
+    // Indices
+    // ------------------------------------------------------------------------
+
+    @@index([processed, createdAt], name: "idx_outbox_unprocessed")
+    @@map("outbox")
+}
