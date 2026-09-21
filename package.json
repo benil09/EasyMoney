@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src --ext ts --exec 'tsx src/index.ts'"
+    "dev": "nodemon --watch src --ext ts --exec 'tsx src/index.ts'",
+    "build": "tsc",
+    "prisma:migrate": "npx prisma migrate dev --name easymoney_migration",
+    "prisma:generate": "npx prisma generate --data-proxy",
+    "prisma:studio": "npx prisma studio"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +20,7 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@prisma/adapter-mariadb": "^7.10.0",
     "@types/express": "^5.0.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
