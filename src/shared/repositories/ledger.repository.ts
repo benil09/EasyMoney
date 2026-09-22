@@ -51,7 +51,7 @@ export class LedgerRepository {
                 created_at:'desc'
             }
         })
-        return ledgerEntity.map(this.mapToLedgerEntry);
+        return ledgerEntity.map((ledgerEntity)=>this.mapToLedgerEntry(ledgerEntity));
 
     }
     private mapToLedgerEntry(ledgerEntity: {

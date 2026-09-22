@@ -35,3 +35,14 @@ export interface LedgerEntry {
     type: $Enums.LedgerType;
     createdAt: Date;
 }
+
+
+export interface Transaction{
+    id:bigint,
+    fromUser:bigint,
+    toUser:bigint,
+    amount:bigint,
+    status:$Enums.TransactionStatus,
+    idempotencyKey:string,
+    createdAt:Date,
+}
