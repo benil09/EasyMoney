@@ -11,40 +11,17 @@
 
 export const TransactionStatus = {
   PENDING: 'PENDING',
-  PROCESSING: 'PROCESSING',
-  SUCCESS: 'SUCCESS',
-  FAILED: 'FAILED',
-  REVERSED: 'REVERSED'
+  DEBITED: 'DEBITED',
+  CREDITED: 'CREDITED',
+  FAILED: 'FAILED'
 } as const
 
 export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
 
 
 export const LedgerType = {
-  CREDIT: 'CREDIT',
-  DEBIT: 'DEBIT'
+  DEBIT: 'DEBIT',
+  CREDIT: 'CREDIT'
 } as const
 
 export type LedgerType = (typeof LedgerType)[keyof typeof LedgerType]
-
-
-export const WalletStatus = {
-  ACTIVE: 'ACTIVE',
-  LOCKED: 'LOCKED',
-  FROZEN: 'FROZEN',
-  CLOSED: 'CLOSED'
-} as const
-
-export type WalletStatus = (typeof WalletStatus)[keyof typeof WalletStatus]
-
-
-export const SagaStatus = {
-  STARTED: 'STARTED',
-  EXECUTING: 'EXECUTING',
-  COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED',
-  COMPENSATING: 'COMPENSATING',
-  COMPENSATED: 'COMPENSATED'
-} as const
-
-export type SagaStatus = (typeof SagaStatus)[keyof typeof SagaStatus]

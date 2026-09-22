@@ -14,8 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model Wallet
- * Wallet holds the monetary balance for a user.
- * Maintains optimistic locking versioning and enforces non-negative balances.
+ * 
  */
 export type WalletModel = runtime.Types.Result.DefaultSelection<Prisma.$WalletPayload>
 
@@ -45,33 +44,27 @@ export type WalletMinAggregateOutputType = {
   id: bigint | null
   user_id: bigint | null
   balance: bigint | null
-  currency: string | null
-  status: $Enums.WalletStatus | null
   version: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type WalletMaxAggregateOutputType = {
   id: bigint | null
   user_id: bigint | null
   balance: bigint | null
-  currency: string | null
-  status: $Enums.WalletStatus | null
   version: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type WalletCountAggregateOutputType = {
   id: number
   user_id: number
   balance: number
-  currency: number
-  status: number
   version: number
-  createdAt: number
-  updatedAt: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -94,33 +87,27 @@ export type WalletMinAggregateInputType = {
   id?: true
   user_id?: true
   balance?: true
-  currency?: true
-  status?: true
   version?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type WalletMaxAggregateInputType = {
   id?: true
   user_id?: true
   balance?: true
-  currency?: true
-  status?: true
   version?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type WalletCountAggregateInputType = {
   id?: true
   user_id?: true
   balance?: true
-  currency?: true
-  status?: true
   version?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -214,11 +201,9 @@ export type WalletGroupByOutputType = {
   id: bigint
   user_id: bigint
   balance: bigint
-  currency: string
-  status: $Enums.WalletStatus
   version: number
-  createdAt: Date
-  updatedAt: Date
+  created_at: Date
+  updated_at: Date
   _count: WalletCountAggregateOutputType | null
   _avg: WalletAvgAggregateOutputType | null
   _sum: WalletSumAggregateOutputType | null
@@ -248,31 +233,18 @@ export type WalletWhereInput = {
   id?: Prisma.BigIntFilter<"Wallet"> | bigint | number
   user_id?: Prisma.BigIntFilter<"Wallet"> | bigint | number
   balance?: Prisma.BigIntFilter<"Wallet"> | bigint | number
-  currency?: Prisma.StringFilter<"Wallet"> | string
-  status?: Prisma.EnumWalletStatusFilter<"Wallet"> | $Enums.WalletStatus
   version?: Prisma.IntFilter<"Wallet"> | number
-  createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
-  user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
-  sentTransactions?: Prisma.TransactionListRelationFilter
-  receivedTransactions?: Prisma.TransactionListRelationFilter
-  ledgerEntries?: Prisma.LedgerListRelationFilter
+  created_at?: Prisma.DateTimeFilter<"Wallet"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Wallet"> | Date | string
 }
 
 export type WalletOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
-  currency?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   version?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  user?: Prisma.UsersOrderByWithRelationInput
-  sentTransactions?: Prisma.TransactionOrderByRelationAggregateInput
-  receivedTransactions?: Prisma.TransactionOrderByRelationAggregateInput
-  ledgerEntries?: Prisma.LedgerOrderByRelationAggregateInput
-  _relevance?: Prisma.WalletOrderByRelevanceInput
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type WalletWhereUniqueInput = Prisma.AtLeast<{
@@ -282,26 +254,18 @@ export type WalletWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.WalletWhereInput[]
   NOT?: Prisma.WalletWhereInput | Prisma.WalletWhereInput[]
   balance?: Prisma.BigIntFilter<"Wallet"> | bigint | number
-  currency?: Prisma.StringFilter<"Wallet"> | string
-  status?: Prisma.EnumWalletStatusFilter<"Wallet"> | $Enums.WalletStatus
   version?: Prisma.IntFilter<"Wallet"> | number
-  createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
-  user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
-  sentTransactions?: Prisma.TransactionListRelationFilter
-  receivedTransactions?: Prisma.TransactionListRelationFilter
-  ledgerEntries?: Prisma.LedgerListRelationFilter
+  created_at?: Prisma.DateTimeFilter<"Wallet"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Wallet"> | Date | string
 }, "id" | "user_id">
 
 export type WalletOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
-  currency?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   version?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.WalletCountOrderByAggregateInput
   _avg?: Prisma.WalletAvgOrderByAggregateInput
   _max?: Prisma.WalletMaxOrderByAggregateInput
@@ -316,121 +280,81 @@ export type WalletScalarWhereWithAggregatesInput = {
   id?: Prisma.BigIntWithAggregatesFilter<"Wallet"> | bigint | number
   user_id?: Prisma.BigIntWithAggregatesFilter<"Wallet"> | bigint | number
   balance?: Prisma.BigIntWithAggregatesFilter<"Wallet"> | bigint | number
-  currency?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
-  status?: Prisma.EnumWalletStatusWithAggregatesFilter<"Wallet"> | $Enums.WalletStatus
   version?: Prisma.IntWithAggregatesFilter<"Wallet"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
 }
 
 export type WalletCreateInput = {
   id?: bigint | number
+  user_id: bigint | number
   balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
   version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UsersCreateNestedOneWithoutWalletInput
-  sentTransactions?: Prisma.TransactionCreateNestedManyWithoutSenderWalletInput
-  receivedTransactions?: Prisma.TransactionCreateNestedManyWithoutReceiverWalletInput
-  ledgerEntries?: Prisma.LedgerCreateNestedManyWithoutWalletInput
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type WalletUncheckedCreateInput = {
   id?: bigint | number
   user_id: bigint | number
   balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
   version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sentTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutSenderWalletInput
-  receivedTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutReceiverWalletInput
-  ledgerEntries?: Prisma.LedgerUncheckedCreateNestedManyWithoutWalletInput
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type WalletUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
   version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UsersUpdateOneRequiredWithoutWalletNestedInput
-  sentTransactions?: Prisma.TransactionUpdateManyWithoutSenderWalletNestedInput
-  receivedTransactions?: Prisma.TransactionUpdateManyWithoutReceiverWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUpdateManyWithoutWalletNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WalletUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
   version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutSenderWalletNestedInput
-  receivedTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutReceiverWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUncheckedUpdateManyWithoutWalletNestedInput
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WalletCreateManyInput = {
   id?: bigint | number
   user_id: bigint | number
   balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
   version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type WalletUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
   version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WalletUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
   version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type WalletNullableScalarRelationFilter = {
-  is?: Prisma.WalletWhereInput | null
-  isNot?: Prisma.WalletWhereInput | null
-}
-
-export type WalletOrderByRelevanceInput = {
-  fields: Prisma.WalletOrderByRelevanceFieldEnum | Prisma.WalletOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WalletCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
-  currency?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   version?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type WalletAvgOrderByAggregateInput = {
@@ -444,22 +368,18 @@ export type WalletMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
-  currency?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   version?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type WalletMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
-  currency?: Prisma.SortOrder
-  status?: Prisma.SortOrder
   version?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type WalletSumOrderByAggregateInput = {
@@ -469,45 +389,12 @@ export type WalletSumOrderByAggregateInput = {
   version?: Prisma.SortOrder
 }
 
-export type WalletScalarRelationFilter = {
-  is?: Prisma.WalletWhereInput
-  isNot?: Prisma.WalletWhereInput
-}
-
-export type WalletCreateNestedOneWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutUserInput, Prisma.WalletUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutUserInput
-  connect?: Prisma.WalletWhereUniqueInput
-}
-
-export type WalletUncheckedCreateNestedOneWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutUserInput, Prisma.WalletUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutUserInput
-  connect?: Prisma.WalletWhereUniqueInput
-}
-
-export type WalletUpdateOneWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutUserInput, Prisma.WalletUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutUserInput
-  upsert?: Prisma.WalletUpsertWithoutUserInput
-  disconnect?: Prisma.WalletWhereInput | boolean
-  delete?: Prisma.WalletWhereInput | boolean
-  connect?: Prisma.WalletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WalletUpdateToOneWithWhereWithoutUserInput, Prisma.WalletUpdateWithoutUserInput>, Prisma.WalletUncheckedUpdateWithoutUserInput>
-}
-
-export type WalletUncheckedUpdateOneWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutUserInput, Prisma.WalletUncheckedCreateWithoutUserInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutUserInput
-  upsert?: Prisma.WalletUpsertWithoutUserInput
-  disconnect?: Prisma.WalletWhereInput | boolean
-  delete?: Prisma.WalletWhereInput | boolean
-  connect?: Prisma.WalletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WalletUpdateToOneWithWhereWithoutUserInput, Prisma.WalletUpdateWithoutUserInput>, Prisma.WalletUncheckedUpdateWithoutUserInput>
-}
-
-export type EnumWalletStatusFieldUpdateOperationsInput = {
-  set?: $Enums.WalletStatus
+export type BigIntFieldUpdateOperationsInput = {
+  set?: bigint | number
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -518,383 +405,19 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type WalletCreateNestedOneWithoutSentTransactionsInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutSentTransactionsInput, Prisma.WalletUncheckedCreateWithoutSentTransactionsInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutSentTransactionsInput
-  connect?: Prisma.WalletWhereUniqueInput
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
-export type WalletCreateNestedOneWithoutReceivedTransactionsInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutReceivedTransactionsInput, Prisma.WalletUncheckedCreateWithoutReceivedTransactionsInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutReceivedTransactionsInput
-  connect?: Prisma.WalletWhereUniqueInput
-}
-
-export type WalletUpdateOneRequiredWithoutSentTransactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutSentTransactionsInput, Prisma.WalletUncheckedCreateWithoutSentTransactionsInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutSentTransactionsInput
-  upsert?: Prisma.WalletUpsertWithoutSentTransactionsInput
-  connect?: Prisma.WalletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WalletUpdateToOneWithWhereWithoutSentTransactionsInput, Prisma.WalletUpdateWithoutSentTransactionsInput>, Prisma.WalletUncheckedUpdateWithoutSentTransactionsInput>
-}
-
-export type WalletUpdateOneRequiredWithoutReceivedTransactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutReceivedTransactionsInput, Prisma.WalletUncheckedCreateWithoutReceivedTransactionsInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutReceivedTransactionsInput
-  upsert?: Prisma.WalletUpsertWithoutReceivedTransactionsInput
-  connect?: Prisma.WalletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WalletUpdateToOneWithWhereWithoutReceivedTransactionsInput, Prisma.WalletUpdateWithoutReceivedTransactionsInput>, Prisma.WalletUncheckedUpdateWithoutReceivedTransactionsInput>
-}
-
-export type WalletCreateNestedOneWithoutLedgerEntriesInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutLedgerEntriesInput, Prisma.WalletUncheckedCreateWithoutLedgerEntriesInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutLedgerEntriesInput
-  connect?: Prisma.WalletWhereUniqueInput
-}
-
-export type WalletUpdateOneRequiredWithoutLedgerEntriesNestedInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutLedgerEntriesInput, Prisma.WalletUncheckedCreateWithoutLedgerEntriesInput>
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutLedgerEntriesInput
-  upsert?: Prisma.WalletUpsertWithoutLedgerEntriesInput
-  connect?: Prisma.WalletWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WalletUpdateToOneWithWhereWithoutLedgerEntriesInput, Prisma.WalletUpdateWithoutLedgerEntriesInput>, Prisma.WalletUncheckedUpdateWithoutLedgerEntriesInput>
-}
-
-export type WalletCreateWithoutUserInput = {
-  id?: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sentTransactions?: Prisma.TransactionCreateNestedManyWithoutSenderWalletInput
-  receivedTransactions?: Prisma.TransactionCreateNestedManyWithoutReceiverWalletInput
-  ledgerEntries?: Prisma.LedgerCreateNestedManyWithoutWalletInput
-}
-
-export type WalletUncheckedCreateWithoutUserInput = {
-  id?: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sentTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutSenderWalletInput
-  receivedTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutReceiverWalletInput
-  ledgerEntries?: Prisma.LedgerUncheckedCreateNestedManyWithoutWalletInput
-}
-
-export type WalletCreateOrConnectWithoutUserInput = {
-  where: Prisma.WalletWhereUniqueInput
-  create: Prisma.XOR<Prisma.WalletCreateWithoutUserInput, Prisma.WalletUncheckedCreateWithoutUserInput>
-}
-
-export type WalletUpsertWithoutUserInput = {
-  update: Prisma.XOR<Prisma.WalletUpdateWithoutUserInput, Prisma.WalletUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.WalletCreateWithoutUserInput, Prisma.WalletUncheckedCreateWithoutUserInput>
-  where?: Prisma.WalletWhereInput
-}
-
-export type WalletUpdateToOneWithWhereWithoutUserInput = {
-  where?: Prisma.WalletWhereInput
-  data: Prisma.XOR<Prisma.WalletUpdateWithoutUserInput, Prisma.WalletUncheckedUpdateWithoutUserInput>
-}
-
-export type WalletUpdateWithoutUserInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentTransactions?: Prisma.TransactionUpdateManyWithoutSenderWalletNestedInput
-  receivedTransactions?: Prisma.TransactionUpdateManyWithoutReceiverWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUpdateManyWithoutWalletNestedInput
-}
-
-export type WalletUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutSenderWalletNestedInput
-  receivedTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutReceiverWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUncheckedUpdateManyWithoutWalletNestedInput
-}
-
-export type WalletCreateWithoutSentTransactionsInput = {
-  id?: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UsersCreateNestedOneWithoutWalletInput
-  receivedTransactions?: Prisma.TransactionCreateNestedManyWithoutReceiverWalletInput
-  ledgerEntries?: Prisma.LedgerCreateNestedManyWithoutWalletInput
-}
-
-export type WalletUncheckedCreateWithoutSentTransactionsInput = {
-  id?: bigint | number
-  user_id: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  receivedTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutReceiverWalletInput
-  ledgerEntries?: Prisma.LedgerUncheckedCreateNestedManyWithoutWalletInput
-}
-
-export type WalletCreateOrConnectWithoutSentTransactionsInput = {
-  where: Prisma.WalletWhereUniqueInput
-  create: Prisma.XOR<Prisma.WalletCreateWithoutSentTransactionsInput, Prisma.WalletUncheckedCreateWithoutSentTransactionsInput>
-}
-
-export type WalletCreateWithoutReceivedTransactionsInput = {
-  id?: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UsersCreateNestedOneWithoutWalletInput
-  sentTransactions?: Prisma.TransactionCreateNestedManyWithoutSenderWalletInput
-  ledgerEntries?: Prisma.LedgerCreateNestedManyWithoutWalletInput
-}
-
-export type WalletUncheckedCreateWithoutReceivedTransactionsInput = {
-  id?: bigint | number
-  user_id: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sentTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutSenderWalletInput
-  ledgerEntries?: Prisma.LedgerUncheckedCreateNestedManyWithoutWalletInput
-}
-
-export type WalletCreateOrConnectWithoutReceivedTransactionsInput = {
-  where: Prisma.WalletWhereUniqueInput
-  create: Prisma.XOR<Prisma.WalletCreateWithoutReceivedTransactionsInput, Prisma.WalletUncheckedCreateWithoutReceivedTransactionsInput>
-}
-
-export type WalletUpsertWithoutSentTransactionsInput = {
-  update: Prisma.XOR<Prisma.WalletUpdateWithoutSentTransactionsInput, Prisma.WalletUncheckedUpdateWithoutSentTransactionsInput>
-  create: Prisma.XOR<Prisma.WalletCreateWithoutSentTransactionsInput, Prisma.WalletUncheckedCreateWithoutSentTransactionsInput>
-  where?: Prisma.WalletWhereInput
-}
-
-export type WalletUpdateToOneWithWhereWithoutSentTransactionsInput = {
-  where?: Prisma.WalletWhereInput
-  data: Prisma.XOR<Prisma.WalletUpdateWithoutSentTransactionsInput, Prisma.WalletUncheckedUpdateWithoutSentTransactionsInput>
-}
-
-export type WalletUpdateWithoutSentTransactionsInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UsersUpdateOneRequiredWithoutWalletNestedInput
-  receivedTransactions?: Prisma.TransactionUpdateManyWithoutReceiverWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUpdateManyWithoutWalletNestedInput
-}
-
-export type WalletUncheckedUpdateWithoutSentTransactionsInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  receivedTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutReceiverWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUncheckedUpdateManyWithoutWalletNestedInput
-}
-
-export type WalletUpsertWithoutReceivedTransactionsInput = {
-  update: Prisma.XOR<Prisma.WalletUpdateWithoutReceivedTransactionsInput, Prisma.WalletUncheckedUpdateWithoutReceivedTransactionsInput>
-  create: Prisma.XOR<Prisma.WalletCreateWithoutReceivedTransactionsInput, Prisma.WalletUncheckedCreateWithoutReceivedTransactionsInput>
-  where?: Prisma.WalletWhereInput
-}
-
-export type WalletUpdateToOneWithWhereWithoutReceivedTransactionsInput = {
-  where?: Prisma.WalletWhereInput
-  data: Prisma.XOR<Prisma.WalletUpdateWithoutReceivedTransactionsInput, Prisma.WalletUncheckedUpdateWithoutReceivedTransactionsInput>
-}
-
-export type WalletUpdateWithoutReceivedTransactionsInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UsersUpdateOneRequiredWithoutWalletNestedInput
-  sentTransactions?: Prisma.TransactionUpdateManyWithoutSenderWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUpdateManyWithoutWalletNestedInput
-}
-
-export type WalletUncheckedUpdateWithoutReceivedTransactionsInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutSenderWalletNestedInput
-  ledgerEntries?: Prisma.LedgerUncheckedUpdateManyWithoutWalletNestedInput
-}
-
-export type WalletCreateWithoutLedgerEntriesInput = {
-  id?: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UsersCreateNestedOneWithoutWalletInput
-  sentTransactions?: Prisma.TransactionCreateNestedManyWithoutSenderWalletInput
-  receivedTransactions?: Prisma.TransactionCreateNestedManyWithoutReceiverWalletInput
-}
-
-export type WalletUncheckedCreateWithoutLedgerEntriesInput = {
-  id?: bigint | number
-  user_id: bigint | number
-  balance?: bigint | number
-  currency?: string
-  status?: $Enums.WalletStatus
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sentTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutSenderWalletInput
-  receivedTransactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutReceiverWalletInput
-}
-
-export type WalletCreateOrConnectWithoutLedgerEntriesInput = {
-  where: Prisma.WalletWhereUniqueInput
-  create: Prisma.XOR<Prisma.WalletCreateWithoutLedgerEntriesInput, Prisma.WalletUncheckedCreateWithoutLedgerEntriesInput>
-}
-
-export type WalletUpsertWithoutLedgerEntriesInput = {
-  update: Prisma.XOR<Prisma.WalletUpdateWithoutLedgerEntriesInput, Prisma.WalletUncheckedUpdateWithoutLedgerEntriesInput>
-  create: Prisma.XOR<Prisma.WalletCreateWithoutLedgerEntriesInput, Prisma.WalletUncheckedCreateWithoutLedgerEntriesInput>
-  where?: Prisma.WalletWhereInput
-}
-
-export type WalletUpdateToOneWithWhereWithoutLedgerEntriesInput = {
-  where?: Prisma.WalletWhereInput
-  data: Prisma.XOR<Prisma.WalletUpdateWithoutLedgerEntriesInput, Prisma.WalletUncheckedUpdateWithoutLedgerEntriesInput>
-}
-
-export type WalletUpdateWithoutLedgerEntriesInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UsersUpdateOneRequiredWithoutWalletNestedInput
-  sentTransactions?: Prisma.TransactionUpdateManyWithoutSenderWalletNestedInput
-  receivedTransactions?: Prisma.TransactionUpdateManyWithoutReceiverWalletNestedInput
-}
-
-export type WalletUncheckedUpdateWithoutLedgerEntriesInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumWalletStatusFieldUpdateOperationsInput | $Enums.WalletStatus
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutSenderWalletNestedInput
-  receivedTransactions?: Prisma.TransactionUncheckedUpdateManyWithoutReceiverWalletNestedInput
-}
-
-
-/**
- * Count Type WalletCountOutputType
- */
-
-export type WalletCountOutputType = {
-  sentTransactions: number
-  receivedTransactions: number
-  ledgerEntries: number
-}
-
-export type WalletCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  sentTransactions?: boolean | WalletCountOutputTypeCountSentTransactionsArgs
-  receivedTransactions?: boolean | WalletCountOutputTypeCountReceivedTransactionsArgs
-  ledgerEntries?: boolean | WalletCountOutputTypeCountLedgerEntriesArgs
-}
-
-/**
- * WalletCountOutputType without action
- */
-export type WalletCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the WalletCountOutputType
-   */
-  select?: Prisma.WalletCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * WalletCountOutputType without action
- */
-export type WalletCountOutputTypeCountSentTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TransactionWhereInput
-}
-
-/**
- * WalletCountOutputType without action
- */
-export type WalletCountOutputTypeCountReceivedTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TransactionWhereInput
-}
-
-/**
- * WalletCountOutputType without action
- */
-export type WalletCountOutputTypeCountLedgerEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LedgerWhereInput
-}
 
 
 export type WalletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   user_id?: boolean
   balance?: boolean
-  currency?: boolean
-  status?: boolean
   version?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
-  sentTransactions?: boolean | Prisma.Wallet$sentTransactionsArgs<ExtArgs>
-  receivedTransactions?: boolean | Prisma.Wallet$receivedTransactionsArgs<ExtArgs>
-  ledgerEntries?: boolean | Prisma.Wallet$ledgerEntriesArgs<ExtArgs>
-  _count?: boolean | Prisma.WalletCountOutputTypeDefaultArgs<ExtArgs>
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["wallet"]>
 
 
@@ -903,76 +426,23 @@ export type WalletSelectScalar = {
   id?: boolean
   user_id?: boolean
   balance?: boolean
-  currency?: boolean
-  status?: boolean
   version?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "balance" | "currency" | "status" | "version" | "createdAt" | "updatedAt", ExtArgs["result"]["wallet"]>
-export type WalletInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
-  sentTransactions?: boolean | Prisma.Wallet$sentTransactionsArgs<ExtArgs>
-  receivedTransactions?: boolean | Prisma.Wallet$receivedTransactionsArgs<ExtArgs>
-  ledgerEntries?: boolean | Prisma.Wallet$ledgerEntriesArgs<ExtArgs>
-  _count?: boolean | Prisma.WalletCountOutputTypeDefaultArgs<ExtArgs>
-}
+export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "balance" | "version" | "created_at" | "updated_at", ExtArgs["result"]["wallet"]>
 
 export type $WalletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Wallet"
-  objects: {
-    /**
-     * The user who owns this wallet. Cascade delete if user profile is purged.
-     */
-    user: Prisma.$UsersPayload<ExtArgs>
-    /**
-     * Transactions initiated where this wallet was the sender (funds deducted).
-     */
-    sentTransactions: Prisma.$TransactionPayload<ExtArgs>[]
-    /**
-     * Transactions received where this wallet was the recipient (funds credited).
-     */
-    receivedTransactions: Prisma.$TransactionPayload<ExtArgs>[]
-    /**
-     * Immutable ledger entries recording all credits and debits to this wallet.
-     */
-    ledgerEntries: Prisma.$LedgerPayload<ExtArgs>[]
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    /**
-     * Unique wallet primary key identifier.
-     */
     id: bigint
-    /**
-     * Foreign key referencing Users.id. Marked @unique for 1-to-1 mapping per user.
-     */
     user_id: bigint
-    /**
-     * Current balance stored in lowest sub-units (e.g., paise: 100 INR = 10000).
-     */
     balance: bigint
-    /**
-     * ISO-4217 standard currency code (e.g., "INR", "USD", "EUR").
-     */
-    currency: string
-    /**
-     * Account operational status (ACTIVE, FROZEN, LOCKED, CLOSED).
-     */
-    status: $Enums.WalletStatus
-    /**
-     * Optimistic locking version number. Incremented on every balance mutation
-     * to detect and prevent concurrent write race conditions.
-     */
     version: number
-    /**
-     * Timestamp when wallet was initially created.
-     */
-    createdAt: Date
-    /**
-     * Automatically updated on any balance or status modification.
-     */
-    updatedAt: Date
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["wallet"]>
   composites: {}
 }
@@ -1313,10 +783,6 @@ readonly fields: WalletFieldRefs;
  */
 export interface Prisma__WalletClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  sentTransactions<T extends Prisma.Wallet$sentTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Wallet$sentTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  receivedTransactions<T extends Prisma.Wallet$receivedTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Wallet$receivedTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ledgerEntries<T extends Prisma.Wallet$ledgerEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Wallet$ledgerEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1349,11 +815,9 @@ export interface WalletFieldRefs {
   readonly id: Prisma.FieldRef<"Wallet", 'BigInt'>
   readonly user_id: Prisma.FieldRef<"Wallet", 'BigInt'>
   readonly balance: Prisma.FieldRef<"Wallet", 'BigInt'>
-  readonly currency: Prisma.FieldRef<"Wallet", 'String'>
-  readonly status: Prisma.FieldRef<"Wallet", 'WalletStatus'>
   readonly version: Prisma.FieldRef<"Wallet", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"Wallet", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Wallet", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"Wallet", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"Wallet", 'DateTime'>
 }
     
 
@@ -1370,10 +834,6 @@ export type WalletFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Wallet
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
   /**
    * Filter, which Wallet to fetch.
    */
@@ -1393,10 +853,6 @@ export type WalletFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
-  /**
    * Filter, which Wallet to fetch.
    */
   where: Prisma.WalletWhereUniqueInput
@@ -1414,10 +870,6 @@ export type WalletFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Wallet
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
   /**
    * Filter, which Wallet to fetch.
    */
@@ -1467,10 +919,6 @@ export type WalletFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
-  /**
    * Filter, which Wallet to fetch.
    */
   where?: Prisma.WalletWhereInput
@@ -1518,10 +966,6 @@ export type WalletFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Wallet
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
   /**
    * Filter, which Wallets to fetch.
    */
@@ -1571,10 +1015,6 @@ export type WalletCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
-  /**
    * The data needed to create a Wallet.
    */
   data: Prisma.XOR<Prisma.WalletCreateInput, Prisma.WalletUncheckedCreateInput>
@@ -1603,10 +1043,6 @@ export type WalletUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Wallet
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
   /**
    * The data needed to update a Wallet.
    */
@@ -1648,10 +1084,6 @@ export type WalletUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
-  /**
    * The filter to search for the Wallet to update in case it exists.
    */
   where: Prisma.WalletWhereUniqueInput
@@ -1678,10 +1110,6 @@ export type WalletDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
-  /**
    * Filter which Wallet to delete.
    */
   where: Prisma.WalletWhereUniqueInput
@@ -1702,78 +1130,6 @@ export type WalletDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Wallet.sentTransactions
- */
-export type Wallet$sentTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Transaction
-   */
-  select?: Prisma.TransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Transaction
-   */
-  omit?: Prisma.TransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TransactionInclude<ExtArgs> | null
-  where?: Prisma.TransactionWhereInput
-  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
-  cursor?: Prisma.TransactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
-}
-
-/**
- * Wallet.receivedTransactions
- */
-export type Wallet$receivedTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Transaction
-   */
-  select?: Prisma.TransactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Transaction
-   */
-  omit?: Prisma.TransactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TransactionInclude<ExtArgs> | null
-  where?: Prisma.TransactionWhereInput
-  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
-  cursor?: Prisma.TransactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
-}
-
-/**
- * Wallet.ledgerEntries
- */
-export type Wallet$ledgerEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Ledger
-   */
-  select?: Prisma.LedgerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Ledger
-   */
-  omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
-  where?: Prisma.LedgerWhereInput
-  orderBy?: Prisma.LedgerOrderByWithRelationInput | Prisma.LedgerOrderByWithRelationInput[]
-  cursor?: Prisma.LedgerWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
-}
-
-/**
  * Wallet without action
  */
 export type WalletDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1785,8 +1141,4 @@ export type WalletDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Wallet
    */
   omit?: Prisma.WalletOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletInclude<ExtArgs> | null
 }

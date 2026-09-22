@@ -14,10 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model Ledger
- * Ledger represents the immutable, append-only double-entry bookkeeping journal.
- * Every successful transaction generates at least two entries:
- * 1. DEBIT on the sender's wallet
- * 2. CREDIT on the receiver's wallet
+ * 
  */
 export type LedgerModel = runtime.Types.Result.DefaultSelection<Prisma.$LedgerPayload>
 
@@ -30,99 +27,87 @@ export type AggregateLedger = {
 }
 
 export type LedgerAvgAggregateOutputType = {
-  ledger_id: number | null
-  wallet_id: number | null
+  id: number | null
+  user_id: number | null
+  transaction_id: number | null
   amount: number | null
-  balance_after: number | null
 }
 
 export type LedgerSumAggregateOutputType = {
-  ledger_id: bigint | null
-  wallet_id: bigint | null
+  id: bigint | null
+  user_id: bigint | null
+  transaction_id: bigint | null
   amount: bigint | null
-  balance_after: bigint | null
 }
 
 export type LedgerMinAggregateOutputType = {
-  ledger_id: bigint | null
-  transaction_id: string | null
-  wallet_id: bigint | null
-  type: $Enums.LedgerType | null
+  id: bigint | null
+  user_id: bigint | null
+  transaction_id: bigint | null
   amount: bigint | null
-  balance_after: bigint | null
-  description: string | null
-  createdAt: Date | null
+  type: $Enums.LedgerType | null
+  created_at: Date | null
 }
 
 export type LedgerMaxAggregateOutputType = {
-  ledger_id: bigint | null
-  transaction_id: string | null
-  wallet_id: bigint | null
-  type: $Enums.LedgerType | null
+  id: bigint | null
+  user_id: bigint | null
+  transaction_id: bigint | null
   amount: bigint | null
-  balance_after: bigint | null
-  description: string | null
-  createdAt: Date | null
+  type: $Enums.LedgerType | null
+  created_at: Date | null
 }
 
 export type LedgerCountAggregateOutputType = {
-  ledger_id: number
+  id: number
+  user_id: number
   transaction_id: number
-  wallet_id: number
-  type: number
   amount: number
-  balance_after: number
-  description: number
-  createdAt: number
+  type: number
+  created_at: number
   _all: number
 }
 
 
 export type LedgerAvgAggregateInputType = {
-  ledger_id?: true
-  wallet_id?: true
+  id?: true
+  user_id?: true
+  transaction_id?: true
   amount?: true
-  balance_after?: true
 }
 
 export type LedgerSumAggregateInputType = {
-  ledger_id?: true
-  wallet_id?: true
+  id?: true
+  user_id?: true
+  transaction_id?: true
   amount?: true
-  balance_after?: true
 }
 
 export type LedgerMinAggregateInputType = {
-  ledger_id?: true
+  id?: true
+  user_id?: true
   transaction_id?: true
-  wallet_id?: true
-  type?: true
   amount?: true
-  balance_after?: true
-  description?: true
-  createdAt?: true
+  type?: true
+  created_at?: true
 }
 
 export type LedgerMaxAggregateInputType = {
-  ledger_id?: true
+  id?: true
+  user_id?: true
   transaction_id?: true
-  wallet_id?: true
-  type?: true
   amount?: true
-  balance_after?: true
-  description?: true
-  createdAt?: true
+  type?: true
+  created_at?: true
 }
 
 export type LedgerCountAggregateInputType = {
-  ledger_id?: true
+  id?: true
+  user_id?: true
   transaction_id?: true
-  wallet_id?: true
-  type?: true
   amount?: true
-  balance_after?: true
-  description?: true
-  createdAt?: true
+  type?: true
+  created_at?: true
   _all?: true
 }
 
@@ -213,14 +198,12 @@ export type LedgerGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type LedgerGroupByOutputType = {
-  ledger_id: bigint
-  transaction_id: string
-  wallet_id: bigint
-  type: $Enums.LedgerType
+  id: bigint
+  user_id: bigint
+  transaction_id: bigint
   amount: bigint
-  balance_after: bigint | null
-  description: string | null
-  createdAt: Date
+  type: $Enums.LedgerType
+  created_at: Date
   _count: LedgerCountAggregateOutputType | null
   _avg: LedgerAvgAggregateOutputType | null
   _sum: LedgerSumAggregateOutputType | null
@@ -247,57 +230,42 @@ export type LedgerWhereInput = {
   AND?: Prisma.LedgerWhereInput | Prisma.LedgerWhereInput[]
   OR?: Prisma.LedgerWhereInput[]
   NOT?: Prisma.LedgerWhereInput | Prisma.LedgerWhereInput[]
-  ledger_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  transaction_id?: Prisma.StringFilter<"Ledger"> | string
-  wallet_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
+  id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
+  user_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
+  transaction_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
   amount?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  balance_after?: Prisma.BigIntNullableFilter<"Ledger"> | bigint | number | null
-  description?: Prisma.StringNullableFilter<"Ledger"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-  transaction?: Prisma.XOR<Prisma.TransactionScalarRelationFilter, Prisma.TransactionWhereInput>
-  wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
+  type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
+  created_at?: Prisma.DateTimeFilter<"Ledger"> | Date | string
 }
 
 export type LedgerOrderByWithRelationInput = {
-  ledger_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   transaction_id?: Prisma.SortOrder
-  wallet_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  balance_after?: Prisma.SortOrderInput | Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  transaction?: Prisma.TransactionOrderByWithRelationInput
-  wallet?: Prisma.WalletOrderByWithRelationInput
-  _relevance?: Prisma.LedgerOrderByRelevanceInput
+  type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type LedgerWhereUniqueInput = Prisma.AtLeast<{
-  ledger_id?: bigint | number
+  id?: bigint | number
   AND?: Prisma.LedgerWhereInput | Prisma.LedgerWhereInput[]
   OR?: Prisma.LedgerWhereInput[]
   NOT?: Prisma.LedgerWhereInput | Prisma.LedgerWhereInput[]
-  transaction_id?: Prisma.StringFilter<"Ledger"> | string
-  wallet_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
+  user_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
+  transaction_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
   amount?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  balance_after?: Prisma.BigIntNullableFilter<"Ledger"> | bigint | number | null
-  description?: Prisma.StringNullableFilter<"Ledger"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-  transaction?: Prisma.XOR<Prisma.TransactionScalarRelationFilter, Prisma.TransactionWhereInput>
-  wallet?: Prisma.XOR<Prisma.WalletScalarRelationFilter, Prisma.WalletWhereInput>
-}, "ledger_id">
+  type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
+  created_at?: Prisma.DateTimeFilter<"Ledger"> | Date | string
+}, "id">
 
 export type LedgerOrderByWithAggregationInput = {
-  ledger_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   transaction_id?: Prisma.SortOrder
-  wallet_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  balance_after?: Prisma.SortOrderInput | Prisma.SortOrder
-  description?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   _count?: Prisma.LedgerCountOrderByAggregateInput
   _avg?: Prisma.LedgerAvgOrderByAggregateInput
   _max?: Prisma.LedgerMaxOrderByAggregateInput
@@ -309,516 +277,156 @@ export type LedgerScalarWhereWithAggregatesInput = {
   AND?: Prisma.LedgerScalarWhereWithAggregatesInput | Prisma.LedgerScalarWhereWithAggregatesInput[]
   OR?: Prisma.LedgerScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LedgerScalarWhereWithAggregatesInput | Prisma.LedgerScalarWhereWithAggregatesInput[]
-  ledger_id?: Prisma.BigIntWithAggregatesFilter<"Ledger"> | bigint | number
-  transaction_id?: Prisma.StringWithAggregatesFilter<"Ledger"> | string
-  wallet_id?: Prisma.BigIntWithAggregatesFilter<"Ledger"> | bigint | number
-  type?: Prisma.EnumLedgerTypeWithAggregatesFilter<"Ledger"> | $Enums.LedgerType
+  id?: Prisma.BigIntWithAggregatesFilter<"Ledger"> | bigint | number
+  user_id?: Prisma.BigIntWithAggregatesFilter<"Ledger"> | bigint | number
+  transaction_id?: Prisma.BigIntWithAggregatesFilter<"Ledger"> | bigint | number
   amount?: Prisma.BigIntWithAggregatesFilter<"Ledger"> | bigint | number
-  balance_after?: Prisma.BigIntNullableWithAggregatesFilter<"Ledger"> | bigint | number | null
-  description?: Prisma.StringNullableWithAggregatesFilter<"Ledger"> | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ledger"> | Date | string
+  type?: Prisma.EnumLedgerTypeWithAggregatesFilter<"Ledger"> | $Enums.LedgerType
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Ledger"> | Date | string
 }
 
 export type LedgerCreateInput = {
-  ledger_id?: bigint | number
-  type: $Enums.LedgerType
+  id?: bigint | number
+  user_id: bigint | number
+  transaction_id: bigint | number
   amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
-  transaction: Prisma.TransactionCreateNestedOneWithoutLedgerEntriesInput
-  wallet: Prisma.WalletCreateNestedOneWithoutLedgerEntriesInput
+  type: $Enums.LedgerType
+  created_at?: Date | string
 }
 
 export type LedgerUncheckedCreateInput = {
-  ledger_id?: bigint | number
-  transaction_id: string
-  wallet_id: bigint | number
-  type: $Enums.LedgerType
+  id?: bigint | number
+  user_id: bigint | number
+  transaction_id: bigint | number
   amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
+  type: $Enums.LedgerType
+  created_at?: Date | string
 }
 
 export type LedgerUpdateInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  transaction_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  transaction?: Prisma.TransactionUpdateOneRequiredWithoutLedgerEntriesNestedInput
-  wallet?: Prisma.WalletUpdateOneRequiredWithoutLedgerEntriesNestedInput
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LedgerUncheckedUpdateInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  transaction_id?: Prisma.StringFieldUpdateOperationsInput | string
-  wallet_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  transaction_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LedgerCreateManyInput = {
-  ledger_id?: bigint | number
-  transaction_id: string
-  wallet_id: bigint | number
-  type: $Enums.LedgerType
+  id?: bigint | number
+  user_id: bigint | number
+  transaction_id: bigint | number
   amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
+  type: $Enums.LedgerType
+  created_at?: Date | string
 }
 
 export type LedgerUpdateManyMutationInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  transaction_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LedgerUncheckedUpdateManyInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  transaction_id?: Prisma.StringFieldUpdateOperationsInput | string
-  wallet_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  transaction_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LedgerListRelationFilter = {
-  every?: Prisma.LedgerWhereInput
-  some?: Prisma.LedgerWhereInput
-  none?: Prisma.LedgerWhereInput
-}
-
-export type LedgerOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
-export type LedgerOrderByRelevanceInput = {
-  fields: Prisma.LedgerOrderByRelevanceFieldEnum | Prisma.LedgerOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
+  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LedgerCountOrderByAggregateInput = {
-  ledger_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   transaction_id?: Prisma.SortOrder
-  wallet_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  balance_after?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type LedgerAvgOrderByAggregateInput = {
-  ledger_id?: Prisma.SortOrder
-  wallet_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  transaction_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  balance_after?: Prisma.SortOrder
 }
 
 export type LedgerMaxOrderByAggregateInput = {
-  ledger_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   transaction_id?: Prisma.SortOrder
-  wallet_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  balance_after?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type LedgerMinOrderByAggregateInput = {
-  ledger_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   transaction_id?: Prisma.SortOrder
-  wallet_id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  balance_after?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
 }
 
 export type LedgerSumOrderByAggregateInput = {
-  ledger_id?: Prisma.SortOrder
-  wallet_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  transaction_id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
-  balance_after?: Prisma.SortOrder
-}
-
-export type LedgerCreateNestedManyWithoutWalletInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutWalletInput, Prisma.LedgerUncheckedCreateWithoutWalletInput> | Prisma.LedgerCreateWithoutWalletInput[] | Prisma.LedgerUncheckedCreateWithoutWalletInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutWalletInput | Prisma.LedgerCreateOrConnectWithoutWalletInput[]
-  createMany?: Prisma.LedgerCreateManyWalletInputEnvelope
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-}
-
-export type LedgerUncheckedCreateNestedManyWithoutWalletInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutWalletInput, Prisma.LedgerUncheckedCreateWithoutWalletInput> | Prisma.LedgerCreateWithoutWalletInput[] | Prisma.LedgerUncheckedCreateWithoutWalletInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutWalletInput | Prisma.LedgerCreateOrConnectWithoutWalletInput[]
-  createMany?: Prisma.LedgerCreateManyWalletInputEnvelope
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-}
-
-export type LedgerUpdateManyWithoutWalletNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutWalletInput, Prisma.LedgerUncheckedCreateWithoutWalletInput> | Prisma.LedgerCreateWithoutWalletInput[] | Prisma.LedgerUncheckedCreateWithoutWalletInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutWalletInput | Prisma.LedgerCreateOrConnectWithoutWalletInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutWalletInput | Prisma.LedgerUpsertWithWhereUniqueWithoutWalletInput[]
-  createMany?: Prisma.LedgerCreateManyWalletInputEnvelope
-  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutWalletInput | Prisma.LedgerUpdateWithWhereUniqueWithoutWalletInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutWalletInput | Prisma.LedgerUpdateManyWithWhereWithoutWalletInput[]
-  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
-}
-
-export type LedgerUncheckedUpdateManyWithoutWalletNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutWalletInput, Prisma.LedgerUncheckedCreateWithoutWalletInput> | Prisma.LedgerCreateWithoutWalletInput[] | Prisma.LedgerUncheckedCreateWithoutWalletInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutWalletInput | Prisma.LedgerCreateOrConnectWithoutWalletInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutWalletInput | Prisma.LedgerUpsertWithWhereUniqueWithoutWalletInput[]
-  createMany?: Prisma.LedgerCreateManyWalletInputEnvelope
-  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutWalletInput | Prisma.LedgerUpdateWithWhereUniqueWithoutWalletInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutWalletInput | Prisma.LedgerUpdateManyWithWhereWithoutWalletInput[]
-  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
-}
-
-export type LedgerCreateNestedManyWithoutTransactionInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTransactionInput, Prisma.LedgerUncheckedCreateWithoutTransactionInput> | Prisma.LedgerCreateWithoutTransactionInput[] | Prisma.LedgerUncheckedCreateWithoutTransactionInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTransactionInput | Prisma.LedgerCreateOrConnectWithoutTransactionInput[]
-  createMany?: Prisma.LedgerCreateManyTransactionInputEnvelope
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-}
-
-export type LedgerUncheckedCreateNestedManyWithoutTransactionInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTransactionInput, Prisma.LedgerUncheckedCreateWithoutTransactionInput> | Prisma.LedgerCreateWithoutTransactionInput[] | Prisma.LedgerUncheckedCreateWithoutTransactionInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTransactionInput | Prisma.LedgerCreateOrConnectWithoutTransactionInput[]
-  createMany?: Prisma.LedgerCreateManyTransactionInputEnvelope
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-}
-
-export type LedgerUpdateManyWithoutTransactionNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTransactionInput, Prisma.LedgerUncheckedCreateWithoutTransactionInput> | Prisma.LedgerCreateWithoutTransactionInput[] | Prisma.LedgerUncheckedCreateWithoutTransactionInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTransactionInput | Prisma.LedgerCreateOrConnectWithoutTransactionInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutTransactionInput | Prisma.LedgerUpsertWithWhereUniqueWithoutTransactionInput[]
-  createMany?: Prisma.LedgerCreateManyTransactionInputEnvelope
-  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutTransactionInput | Prisma.LedgerUpdateWithWhereUniqueWithoutTransactionInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutTransactionInput | Prisma.LedgerUpdateManyWithWhereWithoutTransactionInput[]
-  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
-}
-
-export type LedgerUncheckedUpdateManyWithoutTransactionNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutTransactionInput, Prisma.LedgerUncheckedCreateWithoutTransactionInput> | Prisma.LedgerCreateWithoutTransactionInput[] | Prisma.LedgerUncheckedCreateWithoutTransactionInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutTransactionInput | Prisma.LedgerCreateOrConnectWithoutTransactionInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutTransactionInput | Prisma.LedgerUpsertWithWhereUniqueWithoutTransactionInput[]
-  createMany?: Prisma.LedgerCreateManyTransactionInputEnvelope
-  set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutTransactionInput | Prisma.LedgerUpdateWithWhereUniqueWithoutTransactionInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutTransactionInput | Prisma.LedgerUpdateManyWithWhereWithoutTransactionInput[]
-  deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
 }
 
 export type EnumLedgerTypeFieldUpdateOperationsInput = {
   set?: $Enums.LedgerType
 }
 
-export type NullableBigIntFieldUpdateOperationsInput = {
-  set?: bigint | number | null
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
-}
-
-export type LedgerCreateWithoutWalletInput = {
-  ledger_id?: bigint | number
-  type: $Enums.LedgerType
-  amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
-  transaction: Prisma.TransactionCreateNestedOneWithoutLedgerEntriesInput
-}
-
-export type LedgerUncheckedCreateWithoutWalletInput = {
-  ledger_id?: bigint | number
-  transaction_id: string
-  type: $Enums.LedgerType
-  amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
-}
-
-export type LedgerCreateOrConnectWithoutWalletInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutWalletInput, Prisma.LedgerUncheckedCreateWithoutWalletInput>
-}
-
-export type LedgerCreateManyWalletInputEnvelope = {
-  data: Prisma.LedgerCreateManyWalletInput | Prisma.LedgerCreateManyWalletInput[]
-  skipDuplicates?: boolean
-}
-
-export type LedgerUpsertWithWhereUniqueWithoutWalletInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  update: Prisma.XOR<Prisma.LedgerUpdateWithoutWalletInput, Prisma.LedgerUncheckedUpdateWithoutWalletInput>
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutWalletInput, Prisma.LedgerUncheckedCreateWithoutWalletInput>
-}
-
-export type LedgerUpdateWithWhereUniqueWithoutWalletInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  data: Prisma.XOR<Prisma.LedgerUpdateWithoutWalletInput, Prisma.LedgerUncheckedUpdateWithoutWalletInput>
-}
-
-export type LedgerUpdateManyWithWhereWithoutWalletInput = {
-  where: Prisma.LedgerScalarWhereInput
-  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutWalletInput>
-}
-
-export type LedgerScalarWhereInput = {
-  AND?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
-  OR?: Prisma.LedgerScalarWhereInput[]
-  NOT?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
-  ledger_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  transaction_id?: Prisma.StringFilter<"Ledger"> | string
-  wallet_id?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
-  amount?: Prisma.BigIntFilter<"Ledger"> | bigint | number
-  balance_after?: Prisma.BigIntNullableFilter<"Ledger"> | bigint | number | null
-  description?: Prisma.StringNullableFilter<"Ledger"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Ledger"> | Date | string
-}
-
-export type LedgerCreateWithoutTransactionInput = {
-  ledger_id?: bigint | number
-  type: $Enums.LedgerType
-  amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
-  wallet: Prisma.WalletCreateNestedOneWithoutLedgerEntriesInput
-}
-
-export type LedgerUncheckedCreateWithoutTransactionInput = {
-  ledger_id?: bigint | number
-  wallet_id: bigint | number
-  type: $Enums.LedgerType
-  amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
-}
-
-export type LedgerCreateOrConnectWithoutTransactionInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutTransactionInput, Prisma.LedgerUncheckedCreateWithoutTransactionInput>
-}
-
-export type LedgerCreateManyTransactionInputEnvelope = {
-  data: Prisma.LedgerCreateManyTransactionInput | Prisma.LedgerCreateManyTransactionInput[]
-  skipDuplicates?: boolean
-}
-
-export type LedgerUpsertWithWhereUniqueWithoutTransactionInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  update: Prisma.XOR<Prisma.LedgerUpdateWithoutTransactionInput, Prisma.LedgerUncheckedUpdateWithoutTransactionInput>
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutTransactionInput, Prisma.LedgerUncheckedCreateWithoutTransactionInput>
-}
-
-export type LedgerUpdateWithWhereUniqueWithoutTransactionInput = {
-  where: Prisma.LedgerWhereUniqueInput
-  data: Prisma.XOR<Prisma.LedgerUpdateWithoutTransactionInput, Prisma.LedgerUncheckedUpdateWithoutTransactionInput>
-}
-
-export type LedgerUpdateManyWithWhereWithoutTransactionInput = {
-  where: Prisma.LedgerScalarWhereInput
-  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutTransactionInput>
-}
-
-export type LedgerCreateManyWalletInput = {
-  ledger_id?: bigint | number
-  transaction_id: string
-  type: $Enums.LedgerType
-  amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
-}
-
-export type LedgerUpdateWithoutWalletInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  transaction?: Prisma.TransactionUpdateOneRequiredWithoutLedgerEntriesNestedInput
-}
-
-export type LedgerUncheckedUpdateWithoutWalletInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  transaction_id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LedgerUncheckedUpdateManyWithoutWalletInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  transaction_id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LedgerCreateManyTransactionInput = {
-  ledger_id?: bigint | number
-  wallet_id: bigint | number
-  type: $Enums.LedgerType
-  amount: bigint | number
-  balance_after?: bigint | number | null
-  description?: string | null
-  createdAt?: Date | string
-}
-
-export type LedgerUpdateWithoutTransactionInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  wallet?: Prisma.WalletUpdateOneRequiredWithoutLedgerEntriesNestedInput
-}
-
-export type LedgerUncheckedUpdateWithoutTransactionInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  wallet_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LedgerUncheckedUpdateManyWithoutTransactionInput = {
-  ledger_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  wallet_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
-  amount?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  balance_after?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 
 
 export type LedgerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  ledger_id?: boolean
+  id?: boolean
+  user_id?: boolean
   transaction_id?: boolean
-  wallet_id?: boolean
-  type?: boolean
   amount?: boolean
-  balance_after?: boolean
-  description?: boolean
-  createdAt?: boolean
-  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
+  type?: boolean
+  created_at?: boolean
 }, ExtArgs["result"]["ledger"]>
 
 
 
 export type LedgerSelectScalar = {
-  ledger_id?: boolean
+  id?: boolean
+  user_id?: boolean
   transaction_id?: boolean
-  wallet_id?: boolean
-  type?: boolean
   amount?: boolean
-  balance_after?: boolean
-  description?: boolean
-  createdAt?: boolean
+  type?: boolean
+  created_at?: boolean
 }
 
-export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ledger_id" | "transaction_id" | "wallet_id" | "type" | "amount" | "balance_after" | "description" | "createdAt", ExtArgs["result"]["ledger"]>
-export type LedgerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  transaction?: boolean | Prisma.TransactionDefaultArgs<ExtArgs>
-  wallet?: boolean | Prisma.WalletDefaultArgs<ExtArgs>
-}
+export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "transaction_id" | "amount" | "type" | "created_at", ExtArgs["result"]["ledger"]>
 
 export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ledger"
-  objects: {
-    /**
-     * Parent transaction reference. Restricts deletion to guarantee auditability.
-     */
-    transaction: Prisma.$TransactionPayload<ExtArgs>
-    /**
-     * The wallet associated with this entry.
-     */
-    wallet: Prisma.$WalletPayload<ExtArgs>
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    /**
-     * Monotonically increasing unique ledger entry identifier.
-     */
-    ledger_id: bigint
-    /**
-     * Associated transaction identifier.
-     */
-    transaction_id: string
-    /**
-     * The wallet affected by this ledger entry.
-     */
-    wallet_id: bigint
-    /**
-     * Direction of fund movement (CREDIT = funds added, DEBIT = funds deducted).
-     */
-    type: $Enums.LedgerType
-    /**
-     * Absolute monetary amount of this ledger line item (in sub-units).
-     */
+    id: bigint
+    user_id: bigint
+    transaction_id: bigint
     amount: bigint
-    /**
-     * Running balance of the wallet immediately after this entry is applied.
-     * Vital for reconciliation and tamper-evident audit trails.
-     */
-    balance_after: bigint | null
-    /**
-     * Optional line-item description or narrative (e.g., "P2P transfer", "Cashback").
-     */
-    description: string | null
-    /**
-     * Immutable creation timestamp. Ledgers are write-once and never updated.
-     */
-    createdAt: Date
+    type: $Enums.LedgerType
+    created_at: Date
   }, ExtArgs["result"]["ledger"]>
   composites: {}
 }
@@ -902,8 +510,8 @@ export interface LedgerDelegate<ExtArgs extends runtime.Types.Extensions.Interna
    * // Get first 10 Ledgers
    * const ledgers = await prisma.ledger.findMany({ take: 10 })
    * 
-   * // Only select the `ledger_id`
-   * const ledgerWithLedger_idOnly = await prisma.ledger.findMany({ select: { ledger_id: true } })
+   * // Only select the `id`
+   * const ledgerWithIdOnly = await prisma.ledger.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends LedgerFindManyArgs>(args?: Prisma.SelectSubset<T, LedgerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1159,8 +767,6 @@ readonly fields: LedgerFieldRefs;
  */
 export interface Prisma__LedgerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  transaction<T extends Prisma.TransactionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TransactionDefaultArgs<ExtArgs>>): Prisma.Prisma__TransactionClient<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  wallet<T extends Prisma.WalletDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WalletDefaultArgs<ExtArgs>>): Prisma.Prisma__WalletClient<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1190,14 +796,12 @@ export interface Prisma__LedgerClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Ledger model
  */
 export interface LedgerFieldRefs {
-  readonly ledger_id: Prisma.FieldRef<"Ledger", 'BigInt'>
-  readonly transaction_id: Prisma.FieldRef<"Ledger", 'String'>
-  readonly wallet_id: Prisma.FieldRef<"Ledger", 'BigInt'>
-  readonly type: Prisma.FieldRef<"Ledger", 'LedgerType'>
+  readonly id: Prisma.FieldRef<"Ledger", 'BigInt'>
+  readonly user_id: Prisma.FieldRef<"Ledger", 'BigInt'>
+  readonly transaction_id: Prisma.FieldRef<"Ledger", 'BigInt'>
   readonly amount: Prisma.FieldRef<"Ledger", 'BigInt'>
-  readonly balance_after: Prisma.FieldRef<"Ledger", 'BigInt'>
-  readonly description: Prisma.FieldRef<"Ledger", 'String'>
-  readonly createdAt: Prisma.FieldRef<"Ledger", 'DateTime'>
+  readonly type: Prisma.FieldRef<"Ledger", 'LedgerType'>
+  readonly created_at: Prisma.FieldRef<"Ledger", 'DateTime'>
 }
     
 
@@ -1214,10 +818,6 @@ export type LedgerFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Ledger
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
   /**
    * Filter, which Ledger to fetch.
    */
@@ -1237,10 +837,6 @@ export type LedgerFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
-  /**
    * Filter, which Ledger to fetch.
    */
   where: Prisma.LedgerWhereUniqueInput
@@ -1258,10 +854,6 @@ export type LedgerFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Ledger
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
   /**
    * Filter, which Ledger to fetch.
    */
@@ -1311,10 +903,6 @@ export type LedgerFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
-  /**
    * Filter, which Ledger to fetch.
    */
   where?: Prisma.LedgerWhereInput
@@ -1362,10 +950,6 @@ export type LedgerFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Ledger
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
   /**
    * Filter, which Ledgers to fetch.
    */
@@ -1415,10 +999,6 @@ export type LedgerCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
-  /**
    * The data needed to create a Ledger.
    */
   data: Prisma.XOR<Prisma.LedgerCreateInput, Prisma.LedgerUncheckedCreateInput>
@@ -1447,10 +1027,6 @@ export type LedgerUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Ledger
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
   /**
    * The data needed to update a Ledger.
    */
@@ -1492,10 +1068,6 @@ export type LedgerUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
-  /**
    * The filter to search for the Ledger to update in case it exists.
    */
   where: Prisma.LedgerWhereUniqueInput
@@ -1521,10 +1093,6 @@ export type LedgerDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Ledger
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
   /**
    * Filter which Ledger to delete.
    */
@@ -1557,8 +1125,4 @@ export type LedgerDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Ledger
    */
   omit?: Prisma.LedgerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LedgerInclude<ExtArgs> | null
 }

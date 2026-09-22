@@ -384,12 +384,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Users: 'Users',
   Wallet: 'Wallet',
   Transaction: 'Transaction',
-  Ledger: 'Ledger',
-  SagaInstance: 'SagaInstance',
-  OutboxEvent: 'OutboxEvent'
+  Ledger: 'Ledger'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,76 +402,10 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "wallet" | "transaction" | "ledger" | "sagaInstance" | "outboxEvent"
+    modelProps: "wallet" | "transaction" | "ledger"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
-    Users: {
-      payload: Prisma.$UsersPayload<ExtArgs>
-      fields: Prisma.UsersFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.UsersFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.UsersFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload>
-        }
-        findFirst: {
-          args: Prisma.UsersFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.UsersFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload>
-        }
-        findMany: {
-          args: Prisma.UsersFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload>[]
-        }
-        create: {
-          args: Prisma.UsersCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload>
-        }
-        createMany: {
-          args: Prisma.UsersCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.UsersDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload>
-        }
-        update: {
-          args: Prisma.UsersUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload>
-        }
-        deleteMany: {
-          args: Prisma.UsersDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.UsersUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.UsersUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsersPayload>
-        }
-        aggregate: {
-          args: Prisma.UsersAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateUsers>
-        }
-        groupBy: {
-          args: Prisma.UsersGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UsersGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.UsersCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UsersCountAggregateOutputType> | number
-        }
-      }
-    }
     Wallet: {
       payload: Prisma.$WalletPayload<ExtArgs>
       fields: Prisma.WalletFieldRefs
@@ -673,138 +604,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    SagaInstance: {
-      payload: Prisma.$SagaInstancePayload<ExtArgs>
-      fields: Prisma.SagaInstanceFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.SagaInstanceFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.SagaInstanceFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload>
-        }
-        findFirst: {
-          args: Prisma.SagaInstanceFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.SagaInstanceFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload>
-        }
-        findMany: {
-          args: Prisma.SagaInstanceFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload>[]
-        }
-        create: {
-          args: Prisma.SagaInstanceCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload>
-        }
-        createMany: {
-          args: Prisma.SagaInstanceCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.SagaInstanceDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload>
-        }
-        update: {
-          args: Prisma.SagaInstanceUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload>
-        }
-        deleteMany: {
-          args: Prisma.SagaInstanceDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.SagaInstanceUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.SagaInstanceUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SagaInstancePayload>
-        }
-        aggregate: {
-          args: Prisma.SagaInstanceAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSagaInstance>
-        }
-        groupBy: {
-          args: Prisma.SagaInstanceGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SagaInstanceGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.SagaInstanceCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SagaInstanceCountAggregateOutputType> | number
-        }
-      }
-    }
-    OutboxEvent: {
-      payload: Prisma.$OutboxEventPayload<ExtArgs>
-      fields: Prisma.OutboxEventFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.OutboxEventFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.OutboxEventFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload>
-        }
-        findFirst: {
-          args: Prisma.OutboxEventFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.OutboxEventFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload>
-        }
-        findMany: {
-          args: Prisma.OutboxEventFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload>[]
-        }
-        create: {
-          args: Prisma.OutboxEventCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload>
-        }
-        createMany: {
-          args: Prisma.OutboxEventCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.OutboxEventDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload>
-        }
-        update: {
-          args: Prisma.OutboxEventUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload>
-        }
-        deleteMany: {
-          args: Prisma.OutboxEventDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.OutboxEventUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.OutboxEventUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutboxEventPayload>
-        }
-        aggregate: {
-          args: Prisma.OutboxEventAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateOutboxEvent>
-        }
-        groupBy: {
-          args: Prisma.OutboxEventGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OutboxEventGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.OutboxEventCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OutboxEventCountAggregateOutputType> | number
-        }
-      }
-    }
   }
 } & {
   other: {
@@ -844,87 +643,41 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UsersScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
-
-
 export const WalletScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   balance: 'balance',
-  currency: 'currency',
-  status: 'status',
   version: 'version',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
 export const TransactionScalarFieldEnum = {
-  transaction_id: 'transaction_id',
-  sender_wallet_id: 'sender_wallet_id',
-  receiver_wallet_id: 'receiver_wallet_id',
+  id: 'id',
+  from_user: 'from_user',
+  to_user: 'to_user',
   amount: 'amount',
-  currency: 'currency',
   status: 'status',
   idempotency_key: 'idempotency_key',
-  failure_reason: 'failure_reason',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at'
 } as const
 
 export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
 
 
 export const LedgerScalarFieldEnum = {
-  ledger_id: 'ledger_id',
+  id: 'id',
+  user_id: 'user_id',
   transaction_id: 'transaction_id',
-  wallet_id: 'wallet_id',
-  type: 'type',
   amount: 'amount',
-  balance_after: 'balance_after',
-  description: 'description',
-  createdAt: 'createdAt'
+  type: 'type',
+  created_at: 'created_at'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
-
-
-export const SagaInstanceScalarFieldEnum = {
-  id: 'id',
-  transaction_id: 'transaction_id',
-  current_step: 'current_step',
-  status: 'status',
-  payload: 'payload',
-  error_message: 'error_message',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type SagaInstanceScalarFieldEnum = (typeof SagaInstanceScalarFieldEnum)[keyof typeof SagaInstanceScalarFieldEnum]
-
-
-export const OutboxEventScalarFieldEnum = {
-  id: 'id',
-  aggregate_id: 'aggregate_id',
-  event_type: 'event_type',
-  payload: 'payload',
-  processed: 'processed',
-  createdAt: 'createdAt',
-  processedAt: 'processedAt'
-} as const
-
-export type OutboxEventScalarFieldEnum = (typeof OutboxEventScalarFieldEnum)[keyof typeof OutboxEventScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -935,89 +688,11 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const UsersOrderByRelevanceFieldEnum = {
-  name: 'name',
-  email: 'email',
-  phone: 'phone'
-} as const
-
-export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
-
-
-export const WalletOrderByRelevanceFieldEnum = {
-  currency: 'currency'
-} as const
-
-export type WalletOrderByRelevanceFieldEnum = (typeof WalletOrderByRelevanceFieldEnum)[keyof typeof WalletOrderByRelevanceFieldEnum]
-
-
 export const TransactionOrderByRelevanceFieldEnum = {
-  transaction_id: 'transaction_id',
-  currency: 'currency',
-  idempotency_key: 'idempotency_key',
-  failure_reason: 'failure_reason'
+  idempotency_key: 'idempotency_key'
 } as const
 
 export type TransactionOrderByRelevanceFieldEnum = (typeof TransactionOrderByRelevanceFieldEnum)[keyof typeof TransactionOrderByRelevanceFieldEnum]
-
-
-export const LedgerOrderByRelevanceFieldEnum = {
-  transaction_id: 'transaction_id',
-  description: 'description'
-} as const
-
-export type LedgerOrderByRelevanceFieldEnum = (typeof LedgerOrderByRelevanceFieldEnum)[keyof typeof LedgerOrderByRelevanceFieldEnum]
-
-
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-export const QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-} as const
-
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const SagaInstanceOrderByRelevanceFieldEnum = {
-  id: 'id',
-  transaction_id: 'transaction_id',
-  current_step: 'current_step',
-  error_message: 'error_message'
-} as const
-
-export type SagaInstanceOrderByRelevanceFieldEnum = (typeof SagaInstanceOrderByRelevanceFieldEnum)[keyof typeof SagaInstanceOrderByRelevanceFieldEnum]
-
-
-export const OutboxEventOrderByRelevanceFieldEnum = {
-  id: 'id',
-  aggregate_id: 'aggregate_id',
-  event_type: 'event_type'
-} as const
-
-export type OutboxEventOrderByRelevanceFieldEnum = (typeof OutboxEventOrderByRelevanceFieldEnum)[keyof typeof OutboxEventOrderByRelevanceFieldEnum]
 
 
 
@@ -1034,9 +709,9 @@ export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
- * Reference to a field of type 'String'
+ * Reference to a field of type 'Int'
  */
-export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
@@ -1048,20 +723,6 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
 
 
 /**
- * Reference to a field of type 'WalletStatus'
- */
-export type EnumWalletStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WalletStatus'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
  * Reference to a field of type 'TransactionStatus'
  */
 export type EnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus'>
@@ -1069,37 +730,16 @@ export type EnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'String'
+ */
+export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+/**
  * Reference to a field of type 'LedgerType'
  */
 export type EnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LedgerType'>
-    
-
-
-/**
- * Reference to a field of type 'SagaStatus'
- */
-export type EnumSagaStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SagaStatus'>
-    
-
-
-/**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1219,12 +859,9 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
-  users?: Prisma.UsersOmit
   wallet?: Prisma.WalletOmit
   transaction?: Prisma.TransactionOmit
   ledger?: Prisma.LedgerOmit
-  sagaInstance?: Prisma.SagaInstanceOmit
-  outboxEvent?: Prisma.OutboxEventOmit
 }
 
 /* Types for Logging */

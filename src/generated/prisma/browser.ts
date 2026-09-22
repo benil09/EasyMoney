@@ -18,42 +18,17 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
- * Model Users
- * Users represents the primary account holder.
- * Each user is associated with a wallet and can participate in transactions.
- */
-export type Users = Prisma.UsersModel
-/**
  * Model Wallet
- * Wallet holds the monetary balance for a user.
- * Maintains optimistic locking versioning and enforces non-negative balances.
+ * 
  */
 export type Wallet = Prisma.WalletModel
 /**
  * Model Transaction
- * Transaction records an intentional money movement between two wallets.
- * Acts as the header / parent for corresponding double-entry Ledger records.
+ * 
  */
 export type Transaction = Prisma.TransactionModel
 /**
  * Model Ledger
- * Ledger represents the immutable, append-only double-entry bookkeeping journal.
- * Every successful transaction generates at least two entries:
- * 1. DEBIT on the sender's wallet
- * 2. CREDIT on the receiver's wallet
+ * 
  */
 export type Ledger = Prisma.LedgerModel
-/**
- * Model SagaInstance
- * SagaInstance tracks the state machine of distributed multi-shard transactions.
- * When sender and receiver wallets reside on different shards, this orchestrator
- * coordinates 2-phase execution and compensating transactions.
- */
-export type SagaInstance = Prisma.SagaInstanceModel
-/**
- * Model OutboxEvent
- * OutboxEvent implements the Transactional Outbox pattern.
- * Guarantees that database state changes and downstream event publishing (e.g., Kafka / RabbitMQ)
- * happen atomically within the same local transaction on each shard.
- */
-export type OutboxEvent = Prisma.OutboxEventModel

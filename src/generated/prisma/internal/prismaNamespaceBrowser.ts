@@ -51,12 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Users: 'Users',
   Wallet: 'Wallet',
   Transaction: 'Transaction',
-  Ledger: 'Ledger',
-  SagaInstance: 'SagaInstance',
-  OutboxEvent: 'OutboxEvent'
+  Ledger: 'Ledger'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -75,87 +72,41 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UsersScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
-
-
 export const WalletScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   balance: 'balance',
-  currency: 'currency',
-  status: 'status',
   version: 'version',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
 export const TransactionScalarFieldEnum = {
-  transaction_id: 'transaction_id',
-  sender_wallet_id: 'sender_wallet_id',
-  receiver_wallet_id: 'receiver_wallet_id',
+  id: 'id',
+  from_user: 'from_user',
+  to_user: 'to_user',
   amount: 'amount',
-  currency: 'currency',
   status: 'status',
   idempotency_key: 'idempotency_key',
-  failure_reason: 'failure_reason',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at'
 } as const
 
 export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
 
 
 export const LedgerScalarFieldEnum = {
-  ledger_id: 'ledger_id',
+  id: 'id',
+  user_id: 'user_id',
   transaction_id: 'transaction_id',
-  wallet_id: 'wallet_id',
-  type: 'type',
   amount: 'amount',
-  balance_after: 'balance_after',
-  description: 'description',
-  createdAt: 'createdAt'
+  type: 'type',
+  created_at: 'created_at'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
-
-
-export const SagaInstanceScalarFieldEnum = {
-  id: 'id',
-  transaction_id: 'transaction_id',
-  current_step: 'current_step',
-  status: 'status',
-  payload: 'payload',
-  error_message: 'error_message',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type SagaInstanceScalarFieldEnum = (typeof SagaInstanceScalarFieldEnum)[keyof typeof SagaInstanceScalarFieldEnum]
-
-
-export const OutboxEventScalarFieldEnum = {
-  id: 'id',
-  aggregate_id: 'aggregate_id',
-  event_type: 'event_type',
-  payload: 'payload',
-  processed: 'processed',
-  createdAt: 'createdAt',
-  processedAt: 'processedAt'
-} as const
-
-export type OutboxEventScalarFieldEnum = (typeof OutboxEventScalarFieldEnum)[keyof typeof OutboxEventScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -166,87 +117,9 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const UsersOrderByRelevanceFieldEnum = {
-  name: 'name',
-  email: 'email',
-  phone: 'phone'
-} as const
-
-export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
-
-
-export const WalletOrderByRelevanceFieldEnum = {
-  currency: 'currency'
-} as const
-
-export type WalletOrderByRelevanceFieldEnum = (typeof WalletOrderByRelevanceFieldEnum)[keyof typeof WalletOrderByRelevanceFieldEnum]
-
-
 export const TransactionOrderByRelevanceFieldEnum = {
-  transaction_id: 'transaction_id',
-  currency: 'currency',
-  idempotency_key: 'idempotency_key',
-  failure_reason: 'failure_reason'
+  idempotency_key: 'idempotency_key'
 } as const
 
 export type TransactionOrderByRelevanceFieldEnum = (typeof TransactionOrderByRelevanceFieldEnum)[keyof typeof TransactionOrderByRelevanceFieldEnum]
-
-
-export const LedgerOrderByRelevanceFieldEnum = {
-  transaction_id: 'transaction_id',
-  description: 'description'
-} as const
-
-export type LedgerOrderByRelevanceFieldEnum = (typeof LedgerOrderByRelevanceFieldEnum)[keyof typeof LedgerOrderByRelevanceFieldEnum]
-
-
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-export const QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-} as const
-
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const SagaInstanceOrderByRelevanceFieldEnum = {
-  id: 'id',
-  transaction_id: 'transaction_id',
-  current_step: 'current_step',
-  error_message: 'error_message'
-} as const
-
-export type SagaInstanceOrderByRelevanceFieldEnum = (typeof SagaInstanceOrderByRelevanceFieldEnum)[keyof typeof SagaInstanceOrderByRelevanceFieldEnum]
-
-
-export const OutboxEventOrderByRelevanceFieldEnum = {
-  id: 'id',
-  aggregate_id: 'aggregate_id',
-  event_type: 'event_type'
-} as const
-
-export type OutboxEventOrderByRelevanceFieldEnum = (typeof OutboxEventOrderByRelevanceFieldEnum)[keyof typeof OutboxEventOrderByRelevanceFieldEnum]
 
